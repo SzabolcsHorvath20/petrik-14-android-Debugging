@@ -39,38 +39,16 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
     {
         buttonExit = findViewById(R.id.buttonExit);
         buttonInformation = findViewById(R.id.buttonInformation);
-        buttonNameChange = findViewById(R.id.buttonBack);
+        buttonNameChange = findViewById(R.id.buttonNameChange);
         buttonNext = findViewById(R.id.buttonNext);
         textViewName = findViewById(R.id.textViewName);
 
         SharedPreferences sharedPreferences = getSharedPreferences("Adatok", Context.MODE_PRIVATE);
-        seged = sharedPreferences.getString("Nev","Nincs elmentve a neved!");
+        seged = sharedPreferences.getString("nev","Nincs elmentve a neved!");
         textViewName.setText(seged);
 
 
-        alertDialogBuilder = new AlertDialog.Builder(Menu.this);
-        alertDialogBuilder.setMessage("Ki akarsz lépni az alkalmazásból?");
-        alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Menu.this, "Nem zártad be az alkalmazás!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        alertDialogBuilder.setNeutralButton("Mégse", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        alertDialogBuilder.setCancelable(false);
-        alertDialog = alertDialogBuilder.create();
     }
 
     @Override
@@ -86,6 +64,30 @@ public class Menu extends AppCompatActivity implements View.OnClickListener{
                 Toast.makeText(this, "A neved:" + seged, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonExit:
+                alertDialogBuilder = new AlertDialog.Builder(Menu.this);
+                alertDialogBuilder.setMessage("Ki akarsz lépni az alkalmazásból?");
+                alertDialogBuilder.setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Menu.this, "Nem zártad be az alkalmazás!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                alertDialogBuilder.setNeutralButton("Mégse", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialogBuilder.setCancelable(false);
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
                 break;
             case R.id.buttonNext:
                 Intent next = new Intent(Menu.this,ThirdActivity.class);
